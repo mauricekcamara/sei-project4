@@ -44,9 +44,9 @@ const ListFriends = () => {
                     <Table sx={{ minWidth: 650 }} aria-label='simple table'>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell align='right'>-</TableCell>
-                                <TableCell align='right'>-</TableCell>
+                                <TableCell></TableCell>
+                                <TableCell align='right'></TableCell>
+                                <TableCell align='right'></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

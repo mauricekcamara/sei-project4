@@ -1,5 +1,4 @@
 const express = require('express');
-import path from 'path';
 const pg = require('pg');
 const app = express();
 const cors = require('cors');
