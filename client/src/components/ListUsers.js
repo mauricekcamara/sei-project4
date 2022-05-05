@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,23 +10,30 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
+import { ApplicationContext } from '../application-context';
 
 const ListUsers = () => {
     const [users, setUsers] = useState([]);
+    // Aplication State
+    const [appState, appAction] = useContext(ApplicationContext);
 
     // Get List of Users
     const getUsers = () => {
-        axios.get('/api/users').then((response) => {
-            const users = response.data;
-            setUsers(users);
-            console.log(users);
-        });
+        console.log(appState.currentUser);
+        axios
+            .get('/api/users', { params: { user: appState.currentUser.id } })
+            .then((response) => {
+                const users = response.data;
+                setUsers(users);
+                console.log(users);
+            });
     };
 
     // Add Friend Function
-    const addFriend = (id) => {
+    const addFriend = (friend_id, user_id) => {
         const body = {
-            user_id: id,
+            friend_id: friend_id,
+            user_id: user_id,
         };
         axios.post('/api/friends', body).then((response) => {
             console.log(response);
@@ -36,6 +43,7 @@ const ListUsers = () => {
     useEffect(() => {
         getUsers();
     }, []);
+
     return (
         <Container component='main' maxWidth='md'>
             <CssBaseline />
@@ -64,7 +72,12 @@ const ListUsers = () => {
                                     <TableCell align='right'>
                                         <Button
                                             variant='outlined'
-                                            onClick={() => addFriend(user.id)}>
+                                            onClick={() =>
+                                                addFriend(
+                                                    user.id,
+                                                    appState.currentUser.id
+                                                )
+                                            }>
                                             Add Friend
                                         </Button>
                                     </TableCell>

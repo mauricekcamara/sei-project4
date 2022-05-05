@@ -35,12 +35,21 @@ const Users = {
         });
     },
 
-    getAll: () => {
-        const query = 'SELECT id, name FROM users';
-        return db.query(query).then((response) => {
+    getAll: (id) => {
+        const query = 'SELECT id, name FROM users where id != $1';
+        return db.query(query, [id]).then((response) => {
             return response.rows;
         });
     },
 };
 
 module.exports = Users;
+
+/*
+getAll: (id) => {
+        const query = 'SELECT id, name FROM users where id != $1';
+        return db.query(query, [id]).then((response) => {
+            return response.rows;
+        });
+    },
+    */

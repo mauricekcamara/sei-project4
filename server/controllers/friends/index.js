@@ -5,9 +5,11 @@ const router = express.Router();
 
 // Get all Friends
 router.get('/', (req, res) => {
-    Friends.getAllFriends(/*req.session.userId*/).then((friends) => {
-        res.json(friends);
-    });
+    Friends.getAllFriends(/*req.session.userId*/ req.query.user).then(
+        (friends) => {
+            res.json(friends);
+        }
+    );
 });
 
 // Add a user to the friends list
@@ -26,7 +28,10 @@ router.post('/', (req, res) => {
 router.delete(
     '/:id',
     /*isLoggedIn*/ (req, res) => {
-        Friends.delete(req.params.id /*, req.session.userId*/).then(() => {
+        Friends.delete(
+            /*, req.session.userId*/ req.params.id,
+            req.query.user
+        ).then(() => {
             res.json({ status: 'ok' });
         });
     }

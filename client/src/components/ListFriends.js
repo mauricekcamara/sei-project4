@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,32 +10,40 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
+import { ApplicationContext } from '../application-context';
 
 const ListFriends = () => {
     const [friends, setFriends] = useState([]);
+    // Aplication State
+    const [appState, appAction] = useContext(ApplicationContext);
+    const [reload, setReload] = useState(false);
 
     // Get List of friends
     const getAllFriends = () => {
-        axios.get('/api/friends').then((response) => {
-            const friends = response.data;
-            setFriends(friends);
-            console.log(friends);
-        });
+        axios
+            .get('/api/friends/', { params: { user: appState.currentUser.id } })
+            .then((response) => {
+                const friends = response.data;
+                setFriends(friends);
+                console.log(friends);
+            });
     };
 
     // Delete Friend Function
-    const deleteFriend = (id) => {
-        const body = {
-            user_id: id,
-        };
-        axios.delete('/api/friends', body).then((response) => {
-            console.log(response);
-        });
+    const deleteFriend = (friend_id) => {
+        axios
+            .delete(`/api/friends/${friend_id}`, {
+                params: { user: appState.currentUser.id },
+            })
+            .then((response) => {
+                console.log(response);
+                setReload(!reload);
+            });
     };
 
     useEffect(() => {
         getAllFriends();
-    }, []);
+    }, [reload]);
     return (
         <Container component='main' maxWidth='md'>
             <CssBaseline />
