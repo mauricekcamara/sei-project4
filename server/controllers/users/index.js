@@ -15,8 +15,9 @@ router.get('/:id', isLoggedIn, (req, res) => {
 // Get all users, name only
 router.get(
     '/',
-    /*isLoggedIn*/ (req, res) => {
-        Users.getAll().then((users) => {
+    /*, isLoggedIn*/ (req, res) => {
+        console.log(req.query);
+        Users.getAll(/*req.session.userId*/ req.query.user).then((users) => {
             res.json(users);
         });
     }

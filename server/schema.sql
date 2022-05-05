@@ -11,6 +11,7 @@ CREATE TABLE users (
 
 CREATE TABLE friends (
   id SERIAL PRIMARY KEY NOT NULL,
+  friend_id INT,
   user_id INT,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );

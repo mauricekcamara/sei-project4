@@ -9,6 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
 
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -20,6 +21,7 @@ const CreateUser = () => {
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    let navigate = useNavigate();
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
@@ -39,9 +41,10 @@ const CreateUser = () => {
 
         if (!error) {
             axios
-                .post('http://localhost:5000/api/users', body)
+                .post('/api/users', body)
                 .then((response) => {
                     console.log('success');
+                    navigate('/login');
                 })
                 .catch((error) => {
                     console.log(error.response.data.message);
