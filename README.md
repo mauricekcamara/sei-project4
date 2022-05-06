@@ -17,3 +17,9 @@ A simple social networking app. Allows to signup/login, see a list of users and 
 -   Email Notification and Verification Feature
 
 # Screenshots
+
+![alt text](img1.png)
+
+![alt text](img2.png)
+
+![alt text](img3.png)
