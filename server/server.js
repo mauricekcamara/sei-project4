@@ -16,7 +16,7 @@ const db = require('./database/db');
 
 app.use(
     session({
-        secret: 'supersecretpassword', // CHANGE THIS TO AN ENV VARIABLE
+        secret: process.env.SESSION_SECRET, // CHANGE THIS TO AN ENV VARIABLE
         resave: false,
         saveUninitialized: false,
         cookie: { secure: true },
