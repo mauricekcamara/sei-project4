@@ -23,6 +23,7 @@ import Header from './components/Header';
 import ListUsers from './components/ListUsers';
 import UserLogin from './components/UserLogin';
 import ListFriends from './components/ListFriends';
+import LandingPage from './components/LandingPage';
 
 function App() {
     const [appState, appAction] = useReducer(
@@ -44,6 +45,7 @@ function App() {
                 </Fragment>
                 <Routes>
                     <Route path='Signup' element={<CreateUser />} />
+                    <Route path='/' element={<LandingPage />} />
                     <Route path='Login' element={<UserLogin />} />
                     <Route path='Users' element={<ListUsers />} />
                     <Route path='Friends' element={<ListFriends />} />
