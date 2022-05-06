@@ -1,3 +1,11 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+const path = require('path');
+
+const PORT =
+    process.env.PORT || (process.env.NODE_ENV === 'production' && 3000) || 3001;
+
 const express = require('express');
 const pg = require('pg');
 const app = express();
@@ -31,3 +39,16 @@ app.use('/api/friends', friendsController);
 app.listen(5000, () => {
     console.log('Server has started on port 5000');
 });
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+
+    app.get('/*', (req, res) => {
+        res.sendFile(
+            path.join(__dirname, '..', 'client', 'build', 'index.html')
+        );
+    });
+}
+
+// app.listen(+PORT, () => {
+//     console.log(`Server listening on port ${PORT}`);
+// });
