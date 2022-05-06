@@ -12,7 +12,7 @@ const pg = require('pg');
 const app = express();
 const cors = require('cors');
 const session = require('express-session');
-//const db = require('./database/db');
+const db = require('./database/db');
 
 app.use(
     session({
