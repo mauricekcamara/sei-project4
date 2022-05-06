@@ -67,7 +67,7 @@ const Header = () => {
                                         type: 'LOGOUT',
                                     });
                                     logout();
-                                    navigate('/login');
+                                    navigate('/');
                                 }}>
                                 Logout
                             </Button>
