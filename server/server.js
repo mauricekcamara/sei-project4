@@ -5,7 +5,6 @@ const cors = require('cors');
 const session = require('express-session');
 //const db = require('./database/db');
 
-app.set('trust proxy', 1);
 app.use(
     session({
         secret: 'supersecretpassword', // CHANGE THIS TO AN ENV VARIABLE
@@ -16,6 +15,7 @@ app.use(
 );
 
 // Middleware
+app.set('trust proxy', 1);
 app.use(cors());
 app.use(express.json());
 
