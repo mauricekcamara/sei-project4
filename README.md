@@ -1,5 +1,7 @@
 # Friendsta
 
+https://boiling-eyrie-98474.herokuapp.com/
+
 A simple social networking app. Allows to signup/login, see a list of users and add/remove them from your friends list.
 
 # Tech Stack
